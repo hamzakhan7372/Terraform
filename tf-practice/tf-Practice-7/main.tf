@@ -1,5 +1,5 @@
 resource "aws_key_pair" "samplekey" {
-    key_name = "samplekey"
+    key_name = "samplekey" 
     public_key = file("samplekey.pub")
 
 }
@@ -29,7 +29,7 @@ resource "aws_instance" "sample_instance" {
 
     connection {
         user = var.user
-        private_key = file("samplekey")
+        private_key = file("samplekey.pem")
         host = self.public_ip
     }
 

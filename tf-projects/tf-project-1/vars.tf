@@ -9,3 +9,7 @@ variable "az-2" {
 variable "az-3" {
     default = "us-east-1c"
 }
+
+variable "region-1" {
+    default = "us-east-1"
+}
