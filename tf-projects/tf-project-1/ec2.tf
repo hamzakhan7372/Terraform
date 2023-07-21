@@ -20,6 +20,7 @@ resource "aws_instance" "tf-instance" {
     "Name" = "tf-ec2-instance"
   }
 
+#copying files using provisioner
   provisioner "file" {
     source      = "bash_ansible.sh"
     destination = "/home/ubuntu/bash_ansible.sh"
@@ -33,6 +34,7 @@ resource "aws_instance" "tf-instance" {
     destination = "/home/ubuntu/playbook-docker.yaml"
   }
 
+#executing files using provisioner
   provisioner "remote-exec" {
     inline = [
       "chmod +x /home/ubuntu/bash_ansible.sh",
@@ -43,6 +45,7 @@ resource "aws_instance" "tf-instance" {
     ]
   }
 
+#establishing connection
   connection {
     user        = var.user
     private_key = file("~/.ssh/tf-sample-key")
