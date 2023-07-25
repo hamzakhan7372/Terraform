@@ -39,7 +39,7 @@ resource "aws_subnet" "tf_pub_subnet_3" {
   }
 }
 
-##Private subnet 
+##Private subnet
 resource "aws_subnet" "tf_private_subnet_1" {
   vpc_id            = aws_vpc.tf_practice_vpc.id
   cidr_block        = "172.50.4.0/24"
@@ -178,4 +178,13 @@ resource "aws_security_group" "tf-security-group-1" {
   }
 
 }
+
+data "aws_vpc" "default" {
+  default = true
+}
+
+data "aws_security_group" "foo" {
+  name = "Default-security-group"
+}
+
 

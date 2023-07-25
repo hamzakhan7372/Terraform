@@ -1,0 +1,36 @@
+---
+- name: Deploy Website in Docker Container
+  hosts: localhost
+  become: true
+  tasks:
+    - name: install unzip
+      apt:
+        name: unzip
+        state: present
+
+    - name: Clone Website from tootplate
+      get_url:
+        url: https://www.tooplate.com/zip-templates/2131_wedding_lite.zip
+        dest: /home/ubuntu/2131_wedding_lite.zip
+    
+    - name: unzip website files
+      unarchive:
+        src: /home/ubuntu/2131_wedding_lite.zip
+        dest: /home/ubuntu/
+      # remote_src: true
+    
+    - name: Run docker conatienr form httpd image
+      docker_container:
+        name: my_website_container
+        image: httpd:latest
+        ports: 
+          - "8090:80"
+        volumes:
+          - "/home/ubuntu/2131_wedding_lite/:/usr/local/apache2/htdocs/"
+        state: started
+
+
+
+
+
+
